@@ -16,3 +16,4 @@ jobs:
       contextClassName: 'FinancasContext'
       outputFilePath: 'R3M.Financas.Api/Migrations'
       outputFileName: 'migrations.sql' 
+    secrets: inherit
