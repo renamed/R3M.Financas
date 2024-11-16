@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using R3M.Financas.Api.Repository;
 using R3M.Financas.Api.Repository.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-builder.Services.AddDbContext<FinancasContext>(opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("financas")));
+builder.Services
+    .AddRepositoryServices(builder.Configuration);
 
 var app = builder.Build();
 
