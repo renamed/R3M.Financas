@@ -1,4 +1,4 @@
-name: Call .NET Workflow
+name: DB migration script generator
 
 on:
   pull_request:
