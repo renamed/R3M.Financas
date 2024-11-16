@@ -15,4 +15,4 @@ jobs:
       startupProjectName: 'R3M.Financas.Api/R3M.Financas.Api.csproj'
       contextClassName: 'FinancasContext'
       outputFilePath: 'R3M.Financas.Api/Migrations'
-      outputFileName: 'migrations.sql'
+      outputFileName: 'migrations.sql' 
