@@ -1,18 +1,19 @@
-name: Call .NET Workflow
+name: DB migration script generator
 
 on:
   pull_request:
     branches: [ main ]
     paths:
-      - 'R3M.Financas.Api\Migrations\'
-      - '!R3M.Financas.Api\Migrations\*.sql'
+      - 'R3M.Financas.Api/Migrations/**'
+      - '!R3M.Financas.Api/Migrations/**.sql'
 
 jobs:
   call-workflow:
     uses: renamed/workflows/.github/workflows/database-migrations-script-generator.yaml@main
     with:
-      projectName: 'R3M.Financas.Api\R3M.Financas.Api.csproj'        
-      startupProjectName: 'R3M.Financas.Api\R3M.Financas.Api.csproj'
+      projectName: 'R3M.Financas.Api/R3M.Financas.Api.csproj'        
+      startupProjectName: 'R3M.Financas.Api/R3M.Financas.Api.csproj'
       contextClassName: 'FinancasContext'
-      outputFilePath: 'R3M.Financas.Api\Migrations'
+      outputFilePath: 'R3M.Financas.Api/Migrations'
       outputFileName: 'migrations.sql' 
+    secrets: inherit

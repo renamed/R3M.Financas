@@ -3,11 +3,11 @@ name: Call .NET Workflow
 on:
   pull_request:
     branches: [ main ]
-
+ 
 jobs:
   call-workflow:
     uses: renamed/workflows/.github/workflows/dotnet-restore-build-test.yaml@main
     with:
       dotnet-version: '8.0.x'
-      solution-file: 'R3M.Financas.sln'
+      solution-file: 'R3M.Financas.sln' 
       build-configuration: 'Release'
