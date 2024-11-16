@@ -19,7 +19,7 @@ namespace R3M.Financas.Api.Migrations
                 table: "Categories",
                 column: "ParentId",
                 principalTable: "Categories",
-                principalColumn: "Id",
+                principalColumn: "Id", 
                 onDelete: ReferentialAction.Restrict);
         }
 
