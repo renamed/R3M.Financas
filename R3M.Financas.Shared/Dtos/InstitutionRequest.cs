@@ -1,8 +1,7 @@
 ﻿namespace R3M.Financas.Shared.Dtos;
 
-public class CategoryRequest
+public class InstitutionRequest
 {
     public string Name { get; set; }
-
-    public int? ParentId { get; set; }
+    public decimal? InitialBalance { get; set; }
 }
