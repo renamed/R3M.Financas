@@ -4,8 +4,8 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - 'R3M.Financas.Api\Migrations\'
-      - '!R3M.Financas.Api\Migrations\*.sql'
+      - 'R3M.Financas.Api/Migrations/**'
+      - '!R3M.Financas.Api/Migrations/**.sql'
 
 jobs:
   call-workflow:
