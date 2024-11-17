@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using R3M.Financas.Api.Repository.Context;
@@ -11,9 +12,11 @@ using R3M.Financas.Api.Repository.Context;
 namespace R3M.Financas.Api.Migrations
 {
     [DbContext(typeof(FinancasContext))]
-    partial class FinancasContextModelSnapshot : ModelSnapshot
+    [Migration("20241117172838_add_snake_case")]
+    partial class add_snake_case
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
