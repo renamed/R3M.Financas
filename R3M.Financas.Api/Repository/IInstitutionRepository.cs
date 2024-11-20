@@ -6,7 +6,8 @@ public interface IInstitutionRepository
 {
     Task AddAsync(Institution entity);
     Task DeleteAsync(Institution entity);
-    ValueTask<Institution?> GetAsync(int id);
+    Task<bool> ExistsAsync(string name);
+    ValueTask<Institution?> GetAsync(Guid id);
     IAsyncEnumerable<Institution> ListAsync();
     Task UpdateAsync(Institution entity);
 }

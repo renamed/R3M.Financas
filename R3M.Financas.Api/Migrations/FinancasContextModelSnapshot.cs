@@ -24,12 +24,10 @@ namespace R3M.Financas.Api.Migrations
 
             modelBuilder.Entity("R3M.Financas.Api.Domain.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("InsertDate")
                         .HasColumnType("timestamp with time zone")
@@ -41,8 +39,8 @@ namespace R3M.Financas.Api.Migrations
                         .HasColumnType("character varying(20)")
                         .HasColumnName("name");
 
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("integer")
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uuid")
                         .HasColumnName("parent_id");
 
                     b.Property<DateTime?>("UpdatenDate")
@@ -64,12 +62,10 @@ namespace R3M.Financas.Api.Migrations
 
             modelBuilder.Entity("R3M.Financas.Api.Domain.Institution", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("Balance")
                         .HasColumnType("numeric")
@@ -105,15 +101,13 @@ namespace R3M.Financas.Api.Migrations
 
             modelBuilder.Entity("R3M.Financas.Api.Domain.Movimentation", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid")
                         .HasColumnName("category_id");
 
                     b.Property<DateOnly>("Date")
@@ -130,12 +124,12 @@ namespace R3M.Financas.Api.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("insert_date");
 
-                    b.Property<int>("InstitutionId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("InstitutionId")
+                        .HasColumnType("uuid")
                         .HasColumnName("institution_id");
 
-                    b.Property<int>("PeriodId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("PeriodId")
+                        .HasColumnType("uuid")
                         .HasColumnName("period_id");
 
                     b.Property<DateTime?>("UpdatenDate")
@@ -163,12 +157,10 @@ namespace R3M.Financas.Api.Migrations
 
             modelBuilder.Entity("R3M.Financas.Api.Domain.Period", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()

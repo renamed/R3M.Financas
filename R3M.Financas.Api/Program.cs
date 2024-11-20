@@ -1,6 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using R3M.Financas.Api.Repository;
-using R3M.Financas.Api.Repository.Context;
+using R3M.Financas.Shared.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +14,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services
+    .AddValidators()
     .AddRepositoryServices(builder.Configuration);
 
 var app = builder.Build();

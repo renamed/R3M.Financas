@@ -26,16 +26,19 @@ public class InstitutionController : ControllerBase
     public async Task<IActionResult> ListAsync()
     {
         var institutions = await institutionRepository.ListAsync().ToListAsync();
-        return Ok(institutions.Select(s => new InstitutionResponse
+        return Ok(new ServerResponse<IEnumerable<InstitutionResponse>>()
         {
-            Id = s.Id,
-            Balance = s.Balance,
-            Name = s.Name,
-        }));
+            Result = institutions.Select(s => new InstitutionResponse
+            {
+                Id = s.Id,
+                Balance = s.Balance,
+                Name = s.Name,
+            })
+        });
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(int id)
+    public async Task<IActionResult> GetAsync(Guid id)
     {
         var response = new ServerResponse<InstitutionResponse>();
         var institution = await institutionRepository.GetAsync(id);
@@ -71,6 +74,13 @@ public class InstitutionController : ControllerBase
             return BadRequest(response);
         }
 
+        bool nameExists = await institutionRepository.ExistsAsync(request.Name);
+        if (nameExists)
+        {
+            response.ErrorMessage = "Name already taken";
+            return BadRequest(response);
+        }
+
         var institution = new Institution
         {
             Balance = request.InitialBalance ?? 0,
@@ -89,7 +99,7 @@ public class InstitutionController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(int id)
+    public async Task<IActionResult> DeleteAsync(Guid id)
     {
         var response = new ServerResponse<InstitutionResponse>();
         var institution = await institutionRepository.GetAsync(id);
@@ -100,11 +110,11 @@ public class InstitutionController : ControllerBase
         }
 
         await institutionRepository.DeleteAsync(institution);
-        return NoContent();
+        return Ok(response);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateAsync(int id, [FromBody] InstitutionUpdateRequest request)
+    public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] InstitutionUpdateRequest request)
     {
         var response = new ServerResponse<InstitutionResponse>();
         var institution = await institutionRepository.GetAsync(id);
@@ -118,6 +128,13 @@ public class InstitutionController : ControllerBase
         if (!validationResult.IsValid)
         {
             response.ErrorMessage = string.Join(", ", validationResult.Errors);
+            return BadRequest(response);
+        }
+
+        bool nameExists = await institutionRepository.ExistsAsync(request.Name);
+        if (nameExists)
+        {
+            response.ErrorMessage = "Name already taken";
             return BadRequest(response);
         }
 

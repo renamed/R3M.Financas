@@ -3,9 +3,9 @@ using R3M.Financas.Shared.Dtos;
 
 namespace R3M.Financas.Shared.Validators;
 
-public class MovimentationValidator : AbstractValidator<MovimentationRequest>
+public class MovimentationRequestValidator : AbstractValidator<MovimentationRequest>
 {
-    public MovimentationValidator()
+    public MovimentationRequestValidator()
     {
         RuleFor(x => x.Date)
             .NotEmpty().WithMessage("{PropertyName} is required");

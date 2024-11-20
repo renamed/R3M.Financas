@@ -6,7 +6,7 @@ public interface IMovimentationRepository
 {
     Task AddAsync(Movimentation entity);
     Task DeleteAsync(Movimentation entity);
-    ValueTask<Movimentation?> GetAsync(int id);
+    ValueTask<Movimentation?> GetAsync(Guid id);
     IAsyncEnumerable<Movimentation> ListAsync();
     Task UpdateAsync(Movimentation entity);
 }
