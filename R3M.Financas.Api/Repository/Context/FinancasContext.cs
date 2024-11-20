@@ -107,10 +107,11 @@ public class FinancasContext : DbContext
     }
 
     private void ConfigRegistry<T>(EntityTypeBuilder<T> builder)
-        where T : Registry
+        where T : Register
     {
         builder.HasKey(k => k.Id);
-        builder.Property(p => p.Id).ValueGeneratedOnAdd();
+        builder.Property(p => p.Id)
+            .ValueGeneratedOnAdd();
     }
 
 
@@ -142,7 +143,7 @@ public class FinancasContext : DbContext
     {
         foreach(var e in ChangeTracker.Entries().Where(x => x.State == EntityState.Added))
         {
-            ((Registry)e.Entity).InsertDate = DateTime.UtcNow;
+            ((Register)e.Entity).InsertDate = DateTime.UtcNow;
         }
     }
 }

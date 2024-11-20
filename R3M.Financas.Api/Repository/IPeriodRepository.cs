@@ -6,7 +6,7 @@ public interface IPeriodRepository
 {
     Task AddAsync(Period entity);
     Task DeleteAsync(Period entity);
-    ValueTask<Period?> GetAsync(int id);
+    ValueTask<Period?> GetAsync(Guid id);
     IAsyncEnumerable<Period> ListAsync();
     Task UpdateAsync(Period entity);
 }

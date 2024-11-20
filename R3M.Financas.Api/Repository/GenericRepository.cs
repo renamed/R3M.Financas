@@ -6,9 +6,9 @@ using System.Linq.Expressions;
 namespace R3M.Financas.Api.Repository;
 
 public class GenericRepository<T> : IGenericRepository<T>
-    where T : Registry
+    where T : Register
 {
-    private readonly DbContext _context;
+    protected readonly DbContext _context;
 
     public GenericRepository(DbContext context)
     {
@@ -45,7 +45,7 @@ public class GenericRepository<T> : IGenericRepository<T>
             .AsAsyncEnumerable();
     }
 
-    public ValueTask<T?> GetAsync(int id)
+    public ValueTask<T?> GetAsync(Guid id)
     {
         return _context.Set<T>().FindAsync(id);
     }

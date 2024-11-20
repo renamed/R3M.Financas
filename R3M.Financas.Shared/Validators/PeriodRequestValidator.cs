@@ -8,18 +8,18 @@ public class PeriodRequestValidator : AbstractValidator<PeriodRequest>
     public PeriodRequestValidator()
     {
         RuleFor(x => x.Description)
-            .NotEmpty().WithMessage("Description is mandatory.")
-            .Length(5).WithMessage("Description length must not exceed 5.");
+            .NotEmpty().WithMessage("{PropertyName} is required")
+            .MaximumLength(5).WithMessage("{PropertyName} length must not exceed {MaxLength}");
 
         RuleFor(x => x.InitialDate)
-            .NotEmpty().WithMessage("Initial date is mandatory");
+            .NotEmpty().WithMessage("{PropertyName} is required");
 
         RuleFor(x => x.FinalDate)
-            .NotEmpty().WithMessage("Final date is mandatory");
+            .NotEmpty().WithMessage("{PropertyName} is required");
 
         RuleFor(x => x)
             .Must(x => x.FinalDate > x.InitialDate)
-            .WithMessage("Final date cannot be later than the initial date.");
+            .WithMessage("Final date cannot be greater than the initial date.");
 
     }
 }
