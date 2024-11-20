@@ -138,7 +138,7 @@ public class InstitutionController : ControllerBase
             return BadRequest(response);
         }
 
-        request.Name = institution.Name;
+        institution.Name = request.Name;
         await institutionRepository.UpdateAsync(institution);
 
         response.Result = new InstitutionResponse
