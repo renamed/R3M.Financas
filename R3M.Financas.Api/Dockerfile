@@ -12,6 +12,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+COPY ["cert.pem", "cert.pem"]
 COPY ["R3M.Financas.Api/R3M.Financas.Api.csproj", "R3M.Financas.Api/"]
 COPY ["R3M.Financas.Client/R3M.Financas.Client.csproj", "R3M.Financas.Client/"]
 COPY ["R3M.Financas.Shared/R3M.Financas.Shared.csproj", "R3M.Financas.Shared/"]
