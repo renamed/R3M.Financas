@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using R3M.Financas.Api.Domain;
-using R3M.Financas.Api.Extensions;
 using R3M.Financas.Api.Repository;
 using R3M.Financas.Shared.Dtos;
 
@@ -12,20 +11,22 @@ namespace R3M.Financas.Api.Controllers;
 public class InstitutionController : ControllerBase
 {
     private readonly IInstitutionRepository institutionRepository;
+    private readonly IMovimentationRepository movimentationRepository;
     private readonly IValidator<InstitutionRequest> validator;
     private readonly IValidator<InstitutionUpdateRequest> updateValidator;
 
-    public InstitutionController(IInstitutionRepository institutionRepository, IValidator<InstitutionRequest> validator, IValidator<InstitutionUpdateRequest> updateValidator)
+    public InstitutionController(IInstitutionRepository institutionRepository, IValidator<InstitutionRequest> validator, IValidator<InstitutionUpdateRequest> updateValidator, IMovimentationRepository movimentationRepository)
     {
         this.institutionRepository = institutionRepository;
         this.validator = validator;
         this.updateValidator = updateValidator;
+        this.movimentationRepository = movimentationRepository;
     }
 
     [HttpGet]
     public async Task<IActionResult> ListAsync()
     {
-        var institutions = await institutionRepository.ListAsync().ToListAsync();
+        var institutions = await institutionRepository.ListAsync();
         return Ok(new ServerResponse<IEnumerable<InstitutionResponse>>()
         {
             Result = institutions.Select(s => new InstitutionResponse
@@ -107,6 +108,13 @@ public class InstitutionController : ControllerBase
         {
             response.ErrorMessage = $"{id} not found";
             return NotFound(response);
+        }
+
+        var movimentationsInPeriod = await movimentationRepository.ListAsync(id);
+        if (movimentationsInPeriod.Any())
+        {
+            response.ErrorMessage = $"Period has movimentations attached to it";
+            return BadRequest(response);
         }
 
         await institutionRepository.DeleteAsync(institution);

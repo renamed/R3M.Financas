@@ -164,8 +164,8 @@ namespace R3M.Financas.Api.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("character(5)")
+                        .HasMaxLength(6)
+                        .HasColumnType("character(6)")
                         .HasColumnName("description")
                         .IsFixedLength();
 

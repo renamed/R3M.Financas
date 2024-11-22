@@ -55,7 +55,7 @@ namespace R3M.Financas.Api.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     start = table.Column<DateOnly>(type: "date", nullable: false),
                     end = table.Column<DateOnly>(type: "date", nullable: false),
-                    description = table.Column<string>(type: "character(5)", fixedLength: true, maxLength: 5, nullable: false),
+                    description = table.Column<string>(type: "character(6)", fixedLength: true, maxLength: 6, nullable: false),
                     insert_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     updaten_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },

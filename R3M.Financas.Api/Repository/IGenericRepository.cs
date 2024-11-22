@@ -1,14 +1,17 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace R3M.Financas.Api.Repository;
 
-public interface IGenericRepository<T>
+public interface IGenericRepository<TEntity, TContext> 
+    where TEntity : class 
+    where TContext : DbContext
 {
-    Task AddAsync(T entity);
-    Task DeleteAsync(T entity);
-    IAsyncEnumerable<T> GetAsync(Expression<Func<T, bool>> predicate);
-    IAsyncEnumerable<T> ListAsync();
-    Task UpdateAsync(T entity);
+    Task AddAsync(TEntity entity);
+    Task DeleteAsync(TEntity entity);
+    Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate);
+    Task<IEnumerable<TEntity>> ListAsync();
+    Task UpdateAsync(TEntity entity);
 }

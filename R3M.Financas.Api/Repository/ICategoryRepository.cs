@@ -8,6 +8,6 @@ public interface ICategoryRepository
     Task AddAsync(Category entity);
     Task DeleteAsync(Category entity);
     ValueTask<Category?> GetAsync(Guid id);
-    IAsyncEnumerable<Category> ListAsync();
+    Task<IEnumerable<Category>> ListAsync();
     Task UpdateAsync(Category entity);
 }

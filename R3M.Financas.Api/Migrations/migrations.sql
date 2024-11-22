@@ -9,7 +9,7 @@ START TRANSACTION;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241120192205_InitialMigration') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241122145926_InitialMigration') THEN
     CREATE TABLE categories (
         id uuid NOT NULL,
         name character varying(20) NOT NULL,
@@ -24,7 +24,7 @@ END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241120192205_InitialMigration') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241122145926_InitialMigration') THEN
     CREATE TABLE institutions (
         id uuid NOT NULL,
         name character varying(20) NOT NULL,
@@ -39,12 +39,12 @@ END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241120192205_InitialMigration') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241122145926_InitialMigration') THEN
     CREATE TABLE periods (
         id uuid NOT NULL,
         start date NOT NULL,
         "end" date NOT NULL,
-        description character(5) NOT NULL,
+        description character(6) NOT NULL,
         insert_date timestamp with time zone,
         updaten_date timestamp with time zone,
         CONSTRAINT pk_periods PRIMARY KEY (id)
@@ -54,7 +54,7 @@ END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241120192205_InitialMigration') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241122145926_InitialMigration') THEN
     CREATE TABLE movimentations (
         id uuid NOT NULL,
         date date NOT NULL,
@@ -75,58 +75,58 @@ END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241120192205_InitialMigration') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241122145926_InitialMigration') THEN
     CREATE UNIQUE INDEX ix_categories_name ON categories (name);
     END IF;
 END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241120192205_InitialMigration') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241122145926_InitialMigration') THEN
     CREATE INDEX ix_categories_parent_id ON categories (parent_id);
     END IF;
 END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241120192205_InitialMigration') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241122145926_InitialMigration') THEN
     CREATE UNIQUE INDEX ix_institutions_name ON institutions (name);
     END IF;
 END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241120192205_InitialMigration') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241122145926_InitialMigration') THEN
     CREATE INDEX ix_movimentations_category_id ON movimentations (category_id);
     END IF;
 END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241120192205_InitialMigration') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241122145926_InitialMigration') THEN
     CREATE INDEX ix_movimentations_institution_id ON movimentations (institution_id);
     END IF;
 END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241120192205_InitialMigration') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241122145926_InitialMigration') THEN
     CREATE INDEX ix_movimentations_period_id ON movimentations (period_id);
     END IF;
 END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241120192205_InitialMigration') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241122145926_InitialMigration') THEN
     CREATE UNIQUE INDEX ix_periods_description ON periods (description);
     END IF;
 END $EF$;
 
 DO $EF$
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241120192205_InitialMigration') THEN
+    IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "migration_id" = '20241122145926_InitialMigration') THEN
     INSERT INTO "__EFMigrationsHistory" (migration_id, product_version)
-    VALUES ('20241120192205_InitialMigration', '8.0.10');
+    VALUES ('20241122145926_InitialMigration', '8.0.10');
     END IF;
 END $EF$;
 COMMIT;

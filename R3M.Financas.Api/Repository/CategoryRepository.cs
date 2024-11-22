@@ -3,7 +3,7 @@ using R3M.Financas.Api.Repository.Context;
 
 namespace R3M.Financas.Api.Repository;
 
-public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
+public class CategoryRepository : GenericRepository<Category, FinancasContext>, ICategoryRepository
 {
     public CategoryRepository(FinancasContext context) : base(context)
     {
