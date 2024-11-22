@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using R3M.Financas.Api.Domain;
-using R3M.Financas.Api.Extensions;
 using R3M.Financas.Api.Repository;
 using R3M.Financas.Shared.Dtos;
 
