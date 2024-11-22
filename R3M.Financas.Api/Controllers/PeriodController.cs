@@ -90,7 +90,7 @@ public class PeriodController : ControllerBase
         }
 
         var periodByDescription = await periodRepository.GetAsync(request.Description);
-        if (periodByDateRange != null)
+        if (periodByDescription != null)
         {
             return BadRequest(new ServerResponse()
             {
@@ -106,7 +106,7 @@ public class PeriodController : ControllerBase
         };
 
         await periodRepository.AddAsync(newPeriod);
-        return Created(Request.Path, new ServerResponse<PeriodResponse>()
+        return Created(Request?.Path, new ServerResponse<PeriodResponse>()
         {
             Result = new PeriodResponse
             {
@@ -120,10 +120,10 @@ public class PeriodController : ControllerBase
 
     private async Task<PagingServerResponse<IEnumerable<PeriodResponse>>> CreatesBuildResponseAsync(DateOnly startDate, DateOnly endDate, int page, int count)
     {        
-        IList<Domain.Period> periods = 
+        List<Period> periods = 
             startDate != default && endDate != default
-            ? await periodRepository.ListAsync(startDate, endDate, page, count).ToListAsync()
-            : await periodRepository.ListAsync(page, count).ToListAsync();
+            ? (await periodRepository.ListAsync(startDate, endDate, page, count)).ToList()
+            : (await periodRepository.ListAsync(page, count)).ToList();
 
         int periodCount = await periodRepository.CountAsync();
 

@@ -11,29 +11,29 @@ public class PeriodRepository : GenericRepository<Period, FinancasContext>, IPer
     {
     }
 
-    public IAsyncEnumerable<Period> ListAsync(int page, int count)
+    public async Task<IEnumerable<Period>> ListAsync(int page, int count)
     {
         int skipCount = (page - 1) * count;
-        return Context
+        return await Context
             .Periods
             .AsNoTracking()
             .OrderBy(p => p.Id)
             .Skip(skipCount)
             .Take(count)
-            .AsAsyncEnumerable();
+            .ToListAsync();
     }
 
-    public IAsyncEnumerable<Period> ListAsync(DateOnly startDate, DateOnly endDate, int page, int count)
+    public async Task<IEnumerable<Period>> ListAsync(DateOnly startDate, DateOnly endDate, int page, int count)
     {
         int skipCount = (page - 1) * count;
-        return Context
+        return await Context
             .Periods
             .AsNoTracking()
             .Where(x => x.Start >= startDate && x.End <= endDate)
             .OrderBy(p => p.Id)
             .Skip(skipCount)
             .Take(count)
-            .AsAsyncEnumerable();
+            .ToListAsync();
     }
 
     public Task<Period?> GetAsync(DateOnly startDate, DateOnly endDate)

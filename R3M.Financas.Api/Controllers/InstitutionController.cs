@@ -27,7 +27,7 @@ public class InstitutionController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> ListAsync()
     {
-        var institutions = await institutionRepository.ListAsync().ToListAsync();
+        var institutions = await institutionRepository.ListAsync();
         return Ok(new ServerResponse<IEnumerable<InstitutionResponse>>()
         {
             Result = institutions.Select(s => new InstitutionResponse

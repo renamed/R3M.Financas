@@ -11,7 +11,7 @@ public interface IGenericRepository<TEntity, TContext>
 {
     Task AddAsync(TEntity entity);
     Task DeleteAsync(TEntity entity);
-    IAsyncEnumerable<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate);
-    IAsyncEnumerable<TEntity> ListAsync();
+    Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate);
+    Task<IEnumerable<TEntity>> ListAsync();
     Task UpdateAsync(TEntity entity);
 }

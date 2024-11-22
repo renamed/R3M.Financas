@@ -8,6 +8,6 @@ public interface IInstitutionRepository
     Task DeleteAsync(Institution entity);
     Task<bool> ExistsAsync(string name);
     ValueTask<Institution?> GetAsync(Guid id);
-    IAsyncEnumerable<Institution> ListAsync();
+    Task<IEnumerable<Institution>> ListAsync();
     Task UpdateAsync(Institution entity);
 }

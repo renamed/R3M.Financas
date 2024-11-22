@@ -38,16 +38,16 @@ public class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity, 
         return Context.SaveChangesAsync();
     }
 
-    public IAsyncEnumerable<TEntity> ListAsync()
+    public  async Task<IEnumerable<TEntity>> ListAsync()
     {
-        return Context.Set<TEntity>().AsAsyncEnumerable();
+        return await Context.Set<TEntity>().AsNoTracking().ToListAsync();
     }
 
-    public IAsyncEnumerable<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate)
+    public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate)
     {        
-        return Context.Set<TEntity>()
+        return await Context.Set<TEntity>()
             .Where(predicate)
-            .AsAsyncEnumerable();
+            .ToListAsync();
     }
 
     public ValueTask<TEntity?> GetAsync(Guid id)
