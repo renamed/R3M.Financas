@@ -12,14 +12,16 @@ namespace R3M.Financas.Api.Controllers;
 public class InstitutionController : ControllerBase
 {
     private readonly IInstitutionRepository institutionRepository;
+    private readonly IMovimentationRepository movimentationRepository;
     private readonly IValidator<InstitutionRequest> validator;
     private readonly IValidator<InstitutionUpdateRequest> updateValidator;
 
-    public InstitutionController(IInstitutionRepository institutionRepository, IValidator<InstitutionRequest> validator, IValidator<InstitutionUpdateRequest> updateValidator)
+    public InstitutionController(IInstitutionRepository institutionRepository, IValidator<InstitutionRequest> validator, IValidator<InstitutionUpdateRequest> updateValidator, IMovimentationRepository movimentationRepository)
     {
         this.institutionRepository = institutionRepository;
         this.validator = validator;
         this.updateValidator = updateValidator;
+        this.movimentationRepository = movimentationRepository;
     }
 
     [HttpGet]
@@ -107,6 +109,13 @@ public class InstitutionController : ControllerBase
         {
             response.ErrorMessage = $"{id} not found";
             return NotFound(response);
+        }
+
+        var movimentationsInPeriod = await movimentationRepository.ListAsync(id);
+        if (movimentationsInPeriod.Any())
+        {
+            response.ErrorMessage = $"Period has movimentations attached to it";
+            return BadRequest(response);
         }
 
         await institutionRepository.DeleteAsync(institution);

@@ -11,4 +11,14 @@ public static class IAsyncEnumerableExtensions
         }
         return values;
     }
+
+    public static async Task<bool> AnyAsync<T>(this IAsyncEnumerable<T> target)
+    {
+        await foreach (var item in target)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

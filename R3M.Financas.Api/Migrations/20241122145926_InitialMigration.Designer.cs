@@ -12,7 +12,7 @@ using R3M.Financas.Api.Repository.Context;
 namespace R3M.Financas.Api.Migrations
 {
     [DbContext(typeof(FinancasContext))]
-    [Migration("20241120192205_InitialMigration")]
+    [Migration("20241122145926_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -167,8 +167,8 @@ namespace R3M.Financas.Api.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("character(5)")
+                        .HasMaxLength(6)
+                        .HasColumnType("character(6)")
                         .HasColumnName("description")
                         .IsFixedLength();
 

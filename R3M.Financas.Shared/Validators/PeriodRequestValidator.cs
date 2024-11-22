@@ -9,7 +9,7 @@ public class PeriodRequestValidator : AbstractValidator<PeriodRequest>
     {
         RuleFor(x => x.Description)
             .NotEmpty().WithMessage("{PropertyName} is required")
-            .MaximumLength(5).WithMessage("{PropertyName} length must not exceed {MaxLength}");
+            .MaximumLength(6).WithMessage("{PropertyName} length must not exceed {MaxLength}");
 
         RuleFor(x => x.InitialDate)
             .NotEmpty().WithMessage("{PropertyName} is required");

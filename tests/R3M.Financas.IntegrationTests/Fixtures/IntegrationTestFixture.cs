@@ -60,6 +60,7 @@ public class IntegrationTestFixture : IAsyncLifetime
         await context.Database.MigrateAsync();
 
         context.Institutions.AddRange(JsonSerializer.Deserialize<Institution[]>(await File.ReadAllTextAsync(Path.Combine("Data", "Institution.json"))));
+        context.Periods.AddRange(JsonSerializer.Deserialize<Period[]>(await File.ReadAllTextAsync(Path.Combine("Data", "Period.json"))));
         await context.SaveChangesAsync();
     }
 
@@ -137,5 +138,10 @@ public class IntegrationTestFixture : IAsyncLifetime
     public IInstitutionRepository GetInstitutionRepository()
     {
         return new InstitutionRepository(GetFinancasContext());
+    }
+
+    internal IPeriodRepository GetPeriodRepository()
+    {
+        return new PeriodRepository(GetFinancasContext());
     }
 }

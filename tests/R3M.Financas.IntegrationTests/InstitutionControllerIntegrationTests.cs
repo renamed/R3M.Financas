@@ -6,7 +6,8 @@ using System.Text.Json.Nodes;
 
 namespace R3M.Financas.IntegrationTests;
 
-public class InstitutionControllerIntegrationTests : IClassFixture<IntegrationTestFixture>
+[Collection("IntegrationTests")]
+public class InstitutionControllerIntegrationTests
 {
     private readonly IntegrationTestFixture fixture;
 
@@ -30,9 +31,7 @@ public class InstitutionControllerIntegrationTests : IClassFixture<IntegrationTe
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         responseBody["result"].AsArray().Should()
-            .HaveCountGreaterThanOrEqualTo(4)
-            .And
-            .HaveCountLessThanOrEqualTo(5);
+            .HaveCount(4);
     }
 
     [Fact]
@@ -57,6 +56,7 @@ public class InstitutionControllerIntegrationTests : IClassFixture<IntegrationTe
         var institution = await repo.GetAsync(id);
         institution.Should().NotBeNull();
         institution.Name.Should().Be(InstitutionName);
+        await repo.DeleteAsync(institution);
     }
 
     [Fact]

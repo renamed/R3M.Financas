@@ -1,52 +1,57 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using R3M.Financas.Api.Domain;
-using System;
 using System.Linq.Expressions;
 
 namespace R3M.Financas.Api.Repository;
 
-public class GenericRepository<T> : IGenericRepository<T>
-    where T : Register
+public class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity, TContext>
+    where TEntity : Register
+    where TContext : DbContext
 {
-    protected readonly DbContext _context;
+    protected readonly TContext Context;
 
-    public GenericRepository(DbContext context)
+    public GenericRepository(TContext context)
     {
-        _context = context;
+        Context = context;
     }
 
-    public Task AddAsync(T entity)
+    public Task<int> CountAsync()
     {
-        _context.Set<T>().Add(entity);
-        return _context.SaveChangesAsync();
+        return Context.Set<TEntity>().CountAsync();
     }
 
-    public Task UpdateAsync(T entity)
+    public Task AddAsync(TEntity entity)
     {
-        _context.Set<T>().Update(entity);
-        return _context.SaveChangesAsync();
+        Context.Set<TEntity>().Add(entity);
+        return Context.SaveChangesAsync();
     }
 
-    public Task DeleteAsync(T entity)
+    public Task UpdateAsync(TEntity entity)
     {
-        _context.Set<T>().Remove(entity);
-        return _context.SaveChangesAsync();
+        Context.Set<TEntity>().Update(entity);
+        return Context.SaveChangesAsync();
     }
 
-    public IAsyncEnumerable<T> ListAsync()
+    public Task DeleteAsync(TEntity entity)
     {
-        return _context.Set<T>().AsAsyncEnumerable();
+        Context.Set<TEntity>().Remove(entity);
+        return Context.SaveChangesAsync();
     }
 
-    public IAsyncEnumerable<T> GetAsync(Expression<Func<T, bool>> predicate)
+    public IAsyncEnumerable<TEntity> ListAsync()
+    {
+        return Context.Set<TEntity>().AsAsyncEnumerable();
+    }
+
+    public IAsyncEnumerable<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate)
     {        
-        return _context.Set<T>()
+        return Context.Set<TEntity>()
             .Where(predicate)
             .AsAsyncEnumerable();
     }
 
-    public ValueTask<T?> GetAsync(Guid id)
+    public ValueTask<TEntity?> GetAsync(Guid id)
     {
-        return _context.Set<T>().FindAsync(id);
+        return Context.Set<TEntity>().FindAsync(id);
     }
 }

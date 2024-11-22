@@ -97,7 +97,7 @@ public class FinancasContext : DbContext
             ConfigRegistry(e);
 
             e.Property(p => p.Description)
-                .HasMaxLength(5)
+                .HasMaxLength(6)
                 .IsFixedLength()
                 .IsRequired();
 
