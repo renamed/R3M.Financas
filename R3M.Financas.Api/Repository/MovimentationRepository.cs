@@ -10,6 +10,11 @@ public class MovimentationRepository : GenericRepository<Movimentation, Financas
     {
     }
 
+    public Task<int> GetCategoryCountAsync(Guid id)
+    {
+        return Context.Movimentations.CountAsync(x => x.CategoryId == id);
+    }
+
     public async Task<IEnumerable<Movimentation>> ListAsync(Guid periodId)
     {
         return await Context.Movimentations.Where(x => x.PeriodId == periodId).ToListAsync();
