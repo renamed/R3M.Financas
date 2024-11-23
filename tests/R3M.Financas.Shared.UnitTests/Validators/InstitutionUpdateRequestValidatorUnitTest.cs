@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace R3M.Financas.Shared.Validators;
 
-[Category("UnitTest")]
+[Trait("Category", "UnitTest")]
 public class InstitutionUpdateRequestValidatorUnitTest
 {
     private readonly InstitutionUpdateRequestValidator _validator = new();

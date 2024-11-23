@@ -11,7 +11,7 @@ using System.ComponentModel;
 
 namespace R3M.Financas.UnitTests.Controllers;
 
-[Category("UnitTest")]
+[Trait("Category", "UnitTest")]
 public class PeriodControllerTests
 {
     private readonly IPeriodRepository _periodRepository;

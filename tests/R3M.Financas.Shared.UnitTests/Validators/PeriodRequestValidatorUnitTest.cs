@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace R3M.Financas.Shared.UnitTests.Validators;
 
-[Category("UnitTest")]
+[Trait("Category", "UnitTest")]
 public class PeriodRequestValidatorUnitTest
 {
     private readonly PeriodRequestValidator _validator = new();

@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace R3M.Financas.IntegrationTests;
 
-[Category("IntegrationTest")]
+[Trait("Category", "IntegrationTest")]
 public class PeriodControllerTests : IClassFixture<CustomWebApplicationFactory>
 {
     private readonly HttpClient _client;
@@ -45,9 +45,9 @@ public class PeriodControllerTests : IClassFixture<CustomWebApplicationFactory>
         // Arrange
         var periodRequest = new PeriodRequest
         {
-            Description = "New Period",
-            InitialDate = new DateOnly(2023, 01,01),
-            FinalDate = new DateOnly(2023, 12, 31)
+            Description = "654321",
+            InitialDate = new DateOnly(2020, 03,01),
+            FinalDate = new DateOnly(2020, 03, 31)
         };
 
         var content = new StringContent(JsonSerializer.Serialize(periodRequest), System.Text.Encoding.UTF8, "application/json");
@@ -56,10 +56,11 @@ public class PeriodControllerTests : IClassFixture<CustomWebApplicationFactory>
         var response = await _client.PostAsync("api/period", content);
 
         // Assert
+        var responseContent = await response.Content.ReadAsStringAsync();
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
 
-        var responseContent = await response.Content.ReadAsStringAsync();
-        var serverResponse = JsonSerializer.Deserialize<ServerResponse<PeriodResponse>>(responseContent);
+        
+        var serverResponse = JsonSerializer.Deserialize<ServerResponse<PeriodResponse>>(responseContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
         serverResponse.Should().NotBeNull();
         serverResponse.Result.Should().NotBeNull();
