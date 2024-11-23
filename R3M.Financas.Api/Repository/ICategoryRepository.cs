@@ -1,5 +1,4 @@
-﻿
-using R3M.Financas.Api.Domain;
+﻿using R3M.Financas.Api.Domain;
 
 namespace R3M.Financas.Api.Repository;
 
