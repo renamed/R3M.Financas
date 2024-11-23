@@ -63,7 +63,7 @@ public class PeriodControllerTests : IClassFixture<CustomWebApplicationFactory>
         var serverResponse = JsonSerializer.Deserialize<ServerResponse<PeriodResponse>>(responseContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
         serverResponse.Should().NotBeNull();
-        serverResponse.Result.Should().NotBeNull();
+        serverResponse.Result.Should().NotBeNull(); 
         serverResponse.Result.Description.Should().Be(periodRequest.Description);
     }
 }
