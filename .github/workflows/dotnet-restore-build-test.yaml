@@ -11,4 +11,4 @@ jobs:
       dotnet-version: '8.0.x'
       solution-file: 'R3M.Financas.sln' 
       build-configuration: 'Release'
-    secrets: inherit 
+    secrets: inherit
