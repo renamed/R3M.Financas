@@ -1,5 +1,4 @@
 ﻿using R3M.Financas.Api.Domain;
-using System.Threading.Tasks;
 
 namespace R3M.Financas.Api.Repository;
 

@@ -1,23 +1,25 @@
 ﻿using FluentAssertions;
-using FluentValidation;
 using R3M.Financas.Shared.Dtos;
 using R3M.Financas.Shared.Validators;
+using System.ComponentModel;
 
 namespace R3M.Financas.Shared.UnitTests.Validators;
 
-public class InstitutionRequestValidatorUnitTest
+[Category("UnitTest")]
+public class CategoryRequestValidatorUnitTest
 {
-    private readonly InstitutionRequestValidator _validator = new();
+
+    private readonly CategoryRequestValidator _validator = new();
 
     [Fact]
     public void Name_ShouldNotBeNull()
     {
-        var institution = new InstitutionRequest
+        var category = new CategoryRequest
         {
             Name = null
         };
 
-        var validationResult = _validator.Validate(institution);
+        var validationResult = _validator.Validate(category);
 
         validationResult.IsValid.Should().BeFalse();
         validationResult.Errors.Select(x => x.ErrorMessage).Should().Contain("Name is required");
@@ -26,12 +28,12 @@ public class InstitutionRequestValidatorUnitTest
     [Fact]
     public void Name_ShouldNotBeEmpty()
     {
-        var institution = new InstitutionRequest
+        var category = new CategoryRequest
         {
             Name = string.Empty
         };
 
-        var validationResult = _validator.Validate(institution);
+        var validationResult = _validator.Validate(category);
 
         validationResult.IsValid.Should().BeFalse();
         validationResult.Errors.Select(x => x.ErrorMessage).Should().Contain("Name is required");
@@ -40,40 +42,40 @@ public class InstitutionRequestValidatorUnitTest
     [Fact]
     public void Name_ShouldNotBeEmptySpace()
     {
-        var institution = new InstitutionRequest
+        var category = new CategoryRequest
         {
             Name = "         "
         };
 
-        var validationResult = _validator.Validate(institution);
+        var validationResult = _validator.Validate(category);
 
         validationResult.IsValid.Should().BeFalse();
         validationResult.Errors.Select(x => x.ErrorMessage).Should().Contain("Name is required");
     }
 
     [Fact]
-    public void Name_ShouldHaveLengthMoreThan2()
+    public void Name_ShouldHaveLengthMoreThan3()
     {
-        var institution = new InstitutionRequest
+        var category = new CategoryRequest
         {
-            Name = "a"
+            Name = "ab"
         };
 
-        var validationResult = _validator.Validate(institution);
+        var validationResult = _validator.Validate(category);
 
         validationResult.IsValid.Should().BeFalse();
-        validationResult.Errors.Select(x => x.ErrorMessage).Should().Contain("Name length must be at least 2");
+        validationResult.Errors.Select(x => x.ErrorMessage).Should().Contain("Name length must be at least 3");
     }
 
     [Fact]
     public void Name_ShouldHaveLengthLessThan20()
     {
-        var institution = new InstitutionRequest
+        var category = new CategoryRequest
         {
             Name = new string('a', 21)
         };
 
-        var validationResult = _validator.Validate(institution);
+        var validationResult = _validator.Validate(category);
 
         validationResult.IsValid.Should().BeFalse();
         validationResult.Errors.Select(x => x.ErrorMessage).Should().Contain("Name length must not exceed 20");

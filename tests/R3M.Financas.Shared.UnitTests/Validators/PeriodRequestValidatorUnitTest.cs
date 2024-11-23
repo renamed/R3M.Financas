@@ -1,9 +1,11 @@
 ﻿using FluentAssertions;
 using R3M.Financas.Shared.Dtos;
 using R3M.Financas.Shared.Validators;
+using System.ComponentModel;
 
 namespace R3M.Financas.Shared.UnitTests.Validators;
 
+[Category("UnitTest")]
 public class PeriodRequestValidatorUnitTest
 {
     private readonly PeriodRequestValidator _validator = new();

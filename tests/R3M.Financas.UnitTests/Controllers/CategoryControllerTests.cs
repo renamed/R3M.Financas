@@ -7,10 +7,11 @@ using R3M.Financas.Api.Controllers;
 using R3M.Financas.Api.Domain;
 using R3M.Financas.Api.Repository;
 using R3M.Financas.Shared.Dtos;
-using System;
+using System.ComponentModel;
 
 namespace R3M.Financas.UnitTests.Controllers;
 
+[Category("UnitTest")]
 public class CategoryControllerTests
 {
     private readonly ICategoryRepository _categoryRepository;
