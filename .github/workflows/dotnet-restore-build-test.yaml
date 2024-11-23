@@ -1,4 +1,4 @@
-name: Call .NET Workflow
+name: Restore Build Test
 
 on:
   pull_request:
