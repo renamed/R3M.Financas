@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using R3M.Financas.Shared.Dtos;
-using System.ComponentModel;
 
 namespace R3M.Financas.Shared.Validators;
 

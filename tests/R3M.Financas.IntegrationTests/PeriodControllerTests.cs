@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using R3M.Financas.Shared.Dtos;
-using System.ComponentModel;
 using System.Text.Json;
 
 namespace R3M.Financas.IntegrationTests;
