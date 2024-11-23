@@ -2,7 +2,8 @@
 
 public class CategoryResponse
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Name { get; set; }
-    public CategoryResponse Parent { get; set; }
+    public Guid? ParentId { get; set; }
+    public string ParentName { get; set; }
 }
