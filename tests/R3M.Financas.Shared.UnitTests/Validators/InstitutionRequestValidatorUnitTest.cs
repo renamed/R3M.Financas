@@ -5,7 +5,7 @@ using R3M.Financas.Shared.Validators;
 namespace R3M.Financas.Shared.UnitTests.Validators;
 
 [Trait("Category", "UnitTest")]
-public class InstitutionRequestValidatorUnitTest
+public class InstitutionRequestValidatorUnitTest 
 {
     private readonly InstitutionRequestValidator _validator = new();
 
