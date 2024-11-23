@@ -1,18 +1,17 @@
 ﻿using FluentAssertions;
-using FluentValidation;
 using R3M.Financas.Shared.Dtos;
-using R3M.Financas.Shared.Validators;
 
-namespace R3M.Financas.Shared.UnitTests.Validators;
+namespace R3M.Financas.Shared.Validators;
 
-public class InstitutionRequestValidatorUnitTest
+[Trait("Category", "UnitTest")]
+public class InstitutionUpdateRequestValidatorUnitTest
 {
-    private readonly InstitutionRequestValidator _validator = new();
+    private readonly InstitutionUpdateRequestValidator _validator = new();
 
     [Fact]
     public void Name_ShouldNotBeNull()
     {
-        var institution = new InstitutionRequest
+        var institution = new InstitutionUpdateRequest
         {
             Name = null
         };
@@ -26,7 +25,7 @@ public class InstitutionRequestValidatorUnitTest
     [Fact]
     public void Name_ShouldNotBeEmpty()
     {
-        var institution = new InstitutionRequest
+        var institution = new InstitutionUpdateRequest
         {
             Name = string.Empty
         };
@@ -40,7 +39,7 @@ public class InstitutionRequestValidatorUnitTest
     [Fact]
     public void Name_ShouldNotBeEmptySpace()
     {
-        var institution = new InstitutionRequest
+        var institution = new InstitutionUpdateRequest
         {
             Name = "         "
         };
@@ -54,8 +53,8 @@ public class InstitutionRequestValidatorUnitTest
     [Fact]
     public void Name_ShouldHaveLengthMoreThan2()
     {
-        var institution = new InstitutionRequest
-        {
+        var institution = new InstitutionUpdateRequest
+        { 
             Name = "a"
         };
 
@@ -68,7 +67,7 @@ public class InstitutionRequestValidatorUnitTest
     [Fact]
     public void Name_ShouldHaveLengthLessThan20()
     {
-        var institution = new InstitutionRequest
+        var institution = new InstitutionUpdateRequest
         {
             Name = new string('a', 21)
         };

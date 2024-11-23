@@ -10,6 +10,7 @@ using R3M.Financas.Shared.Dtos;
 
 namespace R3M.Financas.UnitTests.Controllers;
 
+[Trait("Category", "UnitTest")]
 public class InstitutionControllerTests
 {
     private readonly IInstitutionRepository _institutionRepository;

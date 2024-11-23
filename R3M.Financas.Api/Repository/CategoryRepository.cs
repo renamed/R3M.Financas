@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using R3M.Financas.Api.Domain;
 using R3M.Financas.Api.Repository.Context;
-using System.Xml.Linq;
 
 namespace R3M.Financas.Api.Repository;
 
