@@ -10,7 +10,6 @@ public interface ICategoryRepository
     ValueTask<Category?> GetAsync(Guid id);
     ValueTask<Category?> GetAsync(string name);
     Task<int> GetChildrenCountAsync(Guid id);
-    //Task<IEnumerable<Category>> ListAsync();
     Task<IEnumerable<Category>> ListAsync(Guid? parentId);
     Task UpdateAsync(Category entity);
 }
